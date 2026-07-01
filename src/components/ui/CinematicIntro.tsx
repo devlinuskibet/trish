@@ -21,9 +21,10 @@ export const CinematicIntro = () => {
       // Step 0: Dark screen, heartbeat plays (audio context needed, might need user interaction)
       // Step 1-3: Text fades
       for (let i = 0; i < texts.length; i++) {
-        await new Promise(r => setTimeout(r, 2000));
         setStep(i + 1);
-        await new Promise(r => setTimeout(r, 3000));
+        await new Promise(r => setTimeout(r, 4500)); // 2s enter + 2.5s reading time
+        setStep(0);
+        await new Promise(r => setTimeout(r, 2500)); // 2s exit + 0.5s pause
       }
       
       // Step 4: Show image & heart
