@@ -16,7 +16,7 @@ export const LuxuryGallery = () => {
 
   return (
     <section ref={ref} className="py-32 w-full flex flex-col items-center relative overflow-hidden">
-      <h2 className="text-5xl md:text-7xl font-heading text-secondary mb-20 drop-shadow-lg">
+      <h2 className="text-4xl md:text-7xl font-heading text-secondary mb-16 md:mb-20 drop-shadow-lg text-center px-4">
         The Exhibition of Us
       </h2>
       

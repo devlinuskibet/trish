@@ -5,8 +5,11 @@ import { Heart } from 'lucide-react';
 export const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -28,6 +31,8 @@ export const CustomCursor = () => {
       window.removeEventListener('mouseover', updateHoverState);
     };
   }, []);
+
+  if (isTouchDevice) return null;
 
   return (
     <>

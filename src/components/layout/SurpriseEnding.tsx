@@ -50,14 +50,14 @@ export const SurpriseEnding = () => {
   return (
     <section ref={ref} className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-black z-50">
       <motion.div 
-        className="text-center text-4xl md:text-6xl font-quotes text-white space-y-8"
+        className="text-center text-3xl md:text-6xl font-quotes text-white space-y-8 px-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
         {step >= 1 && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>Wait...</motion.p>}
         {step >= 2 && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>I still have something...</motion.p>}
         
-        <div className="mt-20 space-y-4 text-primary font-heading text-5xl md:text-8xl glow-text">
+        <div className="mt-20 space-y-4 text-primary font-heading text-4xl sm:text-5xl md:text-8xl glow-text px-4">
           {step >= 3 && <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>I'll choose you.</motion.p>}
           {step >= 4 && <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>Tomorrow.</motion.p>}
           {step >= 5 && <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>The day after.</motion.p>}

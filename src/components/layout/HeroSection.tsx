@@ -39,7 +39,7 @@ export const HeroSection = () => {
         <h1 className="text-5xl md:text-8xl font-heading text-white mb-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
           Happy Birthday,<br/>My Beautiful Queen
         </h1>
-        <p className="text-xl md:text-2xl font-quotes text-secondary max-w-2xl">
+        <p className="text-xl md:text-2xl font-quotes text-secondary max-w-2xl drop-shadow-md">
           This website is my heart, translated into pixels.
         </p>
         

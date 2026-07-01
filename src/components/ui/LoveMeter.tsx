@@ -26,7 +26,7 @@ export const LoveMeter = () => {
 
   return (
     <section ref={ref} className="py-32 w-full flex flex-col items-center justify-center min-h-[50vh]">
-      <h2 className="text-4xl font-heading text-secondary mb-12">Measuring My Love For You</h2>
+      <h2 className="text-3xl md:text-5xl font-heading text-secondary mb-12 text-center px-4">Measuring My Love For You</h2>
       
       <div className="relative w-64 h-64 flex items-center justify-center">
         <motion.div 
