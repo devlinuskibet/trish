@@ -1,4 +1,3 @@
-import React from 'react';
 import { ScrollManager } from './components/layout/ScrollManager';
 import { MusicEngine } from './components/audio/MusicEngine';
 import { CanvasLayer } from './components/canvas/CanvasLayer';

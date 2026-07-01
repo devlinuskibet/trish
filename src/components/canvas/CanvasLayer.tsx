@@ -1,9 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Stars, Float, Sparkles } from '@react-three/drei';
-import { useStore } from '../../store/useStore';
 
 export const CanvasLayer = () => {
-  const { currentChapter } = useStore();
 
   return (
     <div className="fixed inset-0 z-[-1] pointer-events-none bg-background">

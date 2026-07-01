@@ -24,13 +24,13 @@ export const StoryEngine = () => {
   return (
     <div className="relative w-full flex flex-col items-center">
       {chapters.map((chapter, index) => (
-        <ChapterScene key={index} chapter={chapter} index={index} />
+        <ChapterScene key={index} chapter={chapter} />
       ))}
     </div>
   );
 };
 
-const ChapterScene = ({ chapter, index }: { chapter: typeof chapters[0], index: number }) => {
+const ChapterScene = ({ chapter }: { chapter: typeof chapters[0] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
