@@ -46,7 +46,7 @@ export const CustomCursor = () => {
         transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
       >
         <Heart 
-          className="w-full h-full text-primary drop-shadow-[0_0_8px_rgba(255,77,136,0.8)]" 
+          className={`w-full h-full text-primary drop-shadow-[0_0_8px_rgba(255,77,136,0.8)] ${isHovering ? 'animate-pulse scale-110 duration-200' : ''}`} 
           fill={isHovering ? "#ff4d88" : "none"}
           strokeWidth={2.5}
         />
