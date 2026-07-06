@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { getImages } from '../../utils/images';
 import { FloatingHearts } from '../ui/FloatingHearts';
+import { TimeCounter } from '../ui/TimeCounter';
 
 export const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,6 +51,8 @@ export const HeroSection = () => {
         <p className="text-xl md:text-2xl font-quotes text-secondary max-w-2xl drop-shadow-md">
           This website is my heart, translated into pixels.
         </p>
+
+        <TimeCounter />
         
         <motion.div 
           className="mt-20 w-8 h-12 border-2 border-white/30 rounded-full flex justify-center p-2"
