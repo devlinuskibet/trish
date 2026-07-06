@@ -8,6 +8,7 @@ import { StoryEngine } from './components/layout/StoryEngine';
 import { LuxuryGallery } from './components/layout/LuxuryGallery';
 import { LoveMeter } from './components/ui/LoveMeter';
 import { ReasonsList } from './components/ui/ReasonsList';
+import { EasterEgg } from './components/ui/EasterEgg';
 import { SurpriseEnding } from './components/layout/SurpriseEnding';
 import { useStore } from './store/useStore';
 
@@ -19,6 +20,7 @@ function App() {
       <CustomCursor />
       <MusicEngine />
       <CanvasLayer />
+      <EasterEgg />
       <CinematicIntro />
       
       <main className="relative z-10 w-full min-h-screen">
