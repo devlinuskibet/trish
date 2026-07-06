@@ -7,6 +7,7 @@ import { HeroSection } from './components/layout/HeroSection';
 import { StoryEngine } from './components/layout/StoryEngine';
 import { LuxuryGallery } from './components/layout/LuxuryGallery';
 import { LoveMeter } from './components/ui/LoveMeter';
+import { ReasonsList } from './components/ui/ReasonsList';
 import { SurpriseEnding } from './components/layout/SurpriseEnding';
 import { useStore } from './store/useStore';
 
@@ -26,6 +27,7 @@ function App() {
             <HeroSection />
             <StoryEngine />
             <LuxuryGallery />
+            <ReasonsList />
             <LoveMeter />
             <SurpriseEnding />
           </>
