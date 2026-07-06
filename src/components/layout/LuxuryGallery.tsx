@@ -31,13 +31,16 @@ export const LuxuryGallery = () => {
             transition={{ duration: 1, delay: idx * 0.2 }}
             style={{ y: idx % 2 === 0 ? y : useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
           >
-            <div className="absolute inset-0 bg-primary/20 blur-xl group-hover:bg-primary/40 transition-colors duration-500 rounded-2xl" />
-            <div className="glass-panel p-4 rounded-2xl relative z-10 transform group-hover:scale-105 group-hover:-rotate-2 transition-all duration-700">
+            <div className="absolute inset-0 bg-primary/20 blur-xl group-hover:bg-primary/40 transition-colors duration-500 rounded-sm" />
+            <div className={`bg-white p-4 pb-16 relative z-10 transform transition-all duration-700 shadow-2xl ${idx % 2 === 0 ? 'rotate-[-3deg] hover:rotate-[2deg]' : 'rotate-[3deg] hover:rotate-[-2deg]'} group-hover:scale-105 group-hover:z-20`}>
               <img 
                 src={src} 
                 alt={`Memory ${idx}`} 
-                className="w-full aspect-[3/4] object-cover rounded-xl shadow-inner brightness-90 group-hover:brightness-110 transition-all duration-500"
+                className="w-full aspect-[4/5] object-cover shadow-inner brightness-90 group-hover:brightness-100 transition-all duration-500"
               />
+              <p className="absolute bottom-4 left-0 right-0 font-quotes text-center text-gray-800 text-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500">
+                Forever #{idx + 1}
+              </p>
             </div>
           </motion.div>
         ))}
