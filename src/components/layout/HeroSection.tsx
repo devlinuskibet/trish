@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { getImages } from '../../utils/images';
+import { FloatingHearts } from '../ui/FloatingHearts';
 
 export const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,6 +31,8 @@ export const HeroSection = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
         </motion.div>
       )}
+
+      <FloatingHearts />
 
       <motion.div 
         className="relative z-10 text-center px-4 flex flex-col items-center"
