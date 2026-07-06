@@ -9,8 +9,9 @@ export const HeroSection = () => {
     offset: ["start start", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
   const images = getImages();
   const heroImage = images.length > 1 ? images[1] : images[0]; // Use second image if available
 
@@ -18,8 +19,8 @@ export const HeroSection = () => {
     <section ref={ref} className="relative w-full h-screen flex items-center justify-center overflow-hidden">
       {heroImage && (
         <motion.div 
-          className="absolute inset-0 z-0"
-          style={{ y, opacity }}
+          className="absolute inset-0 z-0 origin-bottom"
+          style={{ y, opacity, scale }}
         >
           <img 
             src={heroImage} 
@@ -36,9 +37,13 @@ export const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, delay: 0.5 }}
       >
-        <h1 className="text-5xl md:text-8xl font-heading text-white mb-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+        <motion.h1 
+          className="text-5xl md:text-8xl font-heading text-white mb-6"
+          animate={{ textShadow: ["0px 0px 15px rgba(255,255,255,0.5)", "0px 0px 30px rgba(255,77,136,0.8)", "0px 0px 15px rgba(255,255,255,0.5)"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
           Happy Birthday,<br/>My Beautiful Queen
-        </h1>
+        </motion.h1>
         <p className="text-xl md:text-2xl font-quotes text-secondary max-w-2xl drop-shadow-md">
           This website is my heart, translated into pixels.
         </p>
