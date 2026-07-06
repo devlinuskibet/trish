@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { getImages } from '../../utils/images';
 
 export const SurpriseEnding = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -47,10 +48,33 @@ export const SurpriseEnding = () => {
     }
   }, [isInView]);
 
+  const images = getImages();
+
   return (
     <section ref={ref} className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-black z-50">
+      {step >= 7 && images.length > 0 && (
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-30 mix-blend-screen overflow-hidden">
+          {images.slice(0, 5).map((img, idx) => (
+            <motion.img 
+              key={idx}
+              src={img}
+              className="absolute object-cover rounded-xl shadow-2xl"
+              style={{
+                width: `${Math.random() * 20 + 15}vw`,
+                top: `${Math.random() * 70 + 5}%`,
+                left: `${Math.random() * 70 + 5}%`,
+                rotate: `${Math.random() * 40 - 20}deg`,
+              }}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 4, delay: idx * 0.7 }}
+            />
+          ))}
+        </div>
+      )}
+
       <motion.div 
-        className="text-center text-3xl md:text-6xl font-quotes text-white space-y-8 px-4"
+        className="text-center text-3xl md:text-6xl font-quotes text-white space-y-8 px-4 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
