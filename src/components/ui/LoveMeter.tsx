@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 export const LoveMeter = () => {
   const [percent, setPercent] = useState(0);
@@ -14,7 +15,15 @@ export const LoveMeter = () => {
         setPercent(prev => {
           if (prev >= 99) {
             clearInterval(interval);
-            setTimeout(() => setIsInfinity(true), 1000);
+            setTimeout(() => {
+              setIsInfinity(true);
+              confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d88', '#ffffff', '#ff99bb']
+              });
+            }, 1000);
             return 99;
           }
           return prev + 1;
