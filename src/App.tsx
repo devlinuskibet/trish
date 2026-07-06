@@ -9,6 +9,7 @@ import { LuxuryGallery } from './components/layout/LuxuryGallery';
 import { LoveMeter } from './components/ui/LoveMeter';
 import { ReasonsList } from './components/ui/ReasonsList';
 import { EasterEgg } from './components/ui/EasterEgg';
+import { Footer } from './components/ui/Footer';
 import { SurpriseEnding } from './components/layout/SurpriseEnding';
 import { useStore } from './store/useStore';
 
@@ -32,6 +33,7 @@ function App() {
             <ReasonsList />
             <LoveMeter />
             <SurpriseEnding />
+            <Footer />
           </>
         )}
       </main>
