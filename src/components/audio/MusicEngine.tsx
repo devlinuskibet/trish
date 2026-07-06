@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useStore } from '../../store/useStore';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Disc3 } from 'lucide-react';
 
 export const MusicEngine = () => {
   const { isAudioPlaying, toggleAudio } = useStore();
@@ -25,16 +25,16 @@ export const MusicEngine = () => {
   return (
     <button
       onClick={toggleAudio}
-      className="fixed top-8 right-8 z-[100] p-3 rounded-full glass-panel text-white hover:bg-white/20 transition-all duration-300 group"
+      className="fixed top-8 right-8 z-[100] p-3 rounded-full glass-panel text-white hover:bg-white/20 transition-all duration-300 group shadow-xl hover:shadow-primary/50"
       aria-label="Toggle Music"
     >
       {isAudioPlaying ? (
-        <Volume2 className="w-6 h-6 animate-pulse" />
+        <Disc3 className="w-8 h-8 animate-[spin_3s_linear_infinite] text-primary" />
       ) : (
-        <VolumeX className="w-6 h-6 opacity-50 group-hover:opacity-100 transition-opacity" />
+        <Disc3 className="w-8 h-8 opacity-50 group-hover:opacity-100 transition-opacity" />
       )}
       <div className="absolute top-full mt-2 right-0 whitespace-nowrap text-xs font-body text-white/70 opacity-0 group-hover:opacity-100 transition-opacity">
-        {isAudioPlaying ? 'Pause Score' : 'Play Score'}
+        {isAudioPlaying ? 'Pause Our Song' : 'Play Our Song'}
       </div>
     </button>
   );
