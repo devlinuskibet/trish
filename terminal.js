@@ -73,7 +73,14 @@ class Terminal {
   bindEvents() {
     this.inputEl.addEventListener('keydown', (e) => {
       this.playKeyClick();
-      if (e.key === 'Tab') {
+      if (e.ctrlKey && e.key === 'l') {
+        e.preventDefault();
+        this.clear();
+      } else if (e.ctrlKey && e.key === 'c') {
+        e.preventDefault();
+        this.writeLine(`<span class="text-green">${this.prompt}</span>${this.escapeHtml(this.inputEl.value)}^C`, 'command-echo');
+        this.inputEl.value = '';
+      } else if (e.key === 'Tab') {
         e.preventDefault();
         this.handleTabCompletion();
       } else if (e.key === 'Enter') {
