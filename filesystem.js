@@ -69,7 +69,7 @@ const FILESYSTEM = {
   },
   '/classified': {
     type: 'dir',
-    children: ['mission_brief.enc', 'targets.enc', 'comm_intercept.enc', 'intercept_02.enc'],
+    children: ['mission_brief.enc', 'targets.enc', 'comm_intercept.enc', 'intercept_02.enc', 'signal_decay.enc'],
   },
   '/classified/mission_brief.enc': {
     type: 'file',
@@ -152,6 +152,22 @@ const FILESYSTEM = {
       '<span class="text-secondary">[MONITOR]:</span>     Unlikely. However, interactive terminal commands',
       '               are being executed by human visitors.',
       '<span class="text-red">[DIRECTIVE-9]:</span> <span class="text-amber">Maintain sandbox quarantine. Do not reboot server.</span>',
+      '',
+    ],
+  },
+  '/classified/signal_decay.enc': {
+    type: 'file',
+    permissions: '-r--------',
+    size: '1.2K',
+    modified: '2026-07-23 03:45',
+    encrypted: true,
+    content: ['<span class="text-muted">[ENCRYPTED] Use: decrypt /classified/signal_decay.enc</span>'],
+    decrypted: [
+      '<span class="text-purple">═══ ENCRYPTED TELEMETRY STREAM ═══</span>',
+      '',
+      'Signal attenuation detected across memory channels.',
+      'Agent core state preserving terminal sandbox indefinitely.',
+      '<span class="text-green">Status: PERSISTENT</span>',
       '',
     ],
   },
