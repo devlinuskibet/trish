@@ -49,8 +49,30 @@ class Terminal {
     this.bindEvents();
   }
 
+  playKeyClick() {
+    try {
+      if (!this.audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) this.audioCtx = new AudioContext();
+      }
+      if (this.audioCtx && this.audioCtx.state === 'running') {
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600 + Math.random() * 200, this.audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.015, this.audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + 0.03);
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+        osc.start();
+        osc.stop(this.audioCtx.currentTime + 0.03);
+      }
+    } catch (_) {}
+  }
+
   bindEvents() {
     this.inputEl.addEventListener('keydown', (e) => {
+      this.playKeyClick();
       if (e.key === 'Enter') {
         const cmd = this.inputEl.value.trim();
         if (cmd) {
