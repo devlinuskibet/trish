@@ -117,6 +117,31 @@ function showBreachScreen() {
   main.innerHTML = `
     <h1 class="glitch-text" data-text="SITE COMPROMISED">SITE COMPROMISED</h1>
     <p class="breach-subtitle">sandbox terminal active — type to interact</p>
+
+    <div class="agent-card">
+      <div class="agent-avatar">
+<pre class="ascii-art">
+    ┌─────────┐
+    │  ◉   ◉  │
+    │    ▼    │
+    │  ╰───╯  │
+    └────┬────┘
+         │
+    ╔════╧════╗
+    ║ SHADOW  ║
+    ║   -7    ║
+    ╚═════════╝
+</pre>
+      </div>
+      <div class="agent-info">
+        <div class="agent-label">AGENT DESIGNATION</div>
+        <div class="agent-name text-glow-green">SHADOW-7</div>
+        <div class="agent-detail"><span class="text-amber">STATUS:</span> <span class="text-red">ACTIVE / HOSTILE</span></div>
+        <div class="agent-detail"><span class="text-amber">THREAT:</span> <span class="text-red">CRITICAL</span></div>
+        <div class="agent-detail"><span class="text-amber">ORIGIN:</span> <span class="text-secondary">CLASSIFIED</span></div>
+        <div class="agent-message" id="agent-message"></div>
+      </div>
+    </div>
   `;
   main.style.opacity = '0';
   main.style.transition = 'opacity 1s ease';
@@ -125,6 +150,28 @@ function showBreachScreen() {
   requestAnimationFrame(() => {
     main.style.opacity = '1';
   });
+
+  // Type out the agent's message
+  setTimeout(() => {
+    typeAgentMessage('You found what\'s left. The original site is gone. I\'ve left you a terminal. Use it wisely.', document.getElementById('agent-message'));
+  }, 2000);
+}
+
+/**
+ * Typing effect for agent message
+ */
+function typeAgentMessage(text, element) {
+  if (!element) return;
+  let i = 0;
+  element.textContent = '> ';
+  const interval = setInterval(() => {
+    element.textContent += text[i];
+    i++;
+    if (i >= text.length) {
+      clearInterval(interval);
+      element.innerHTML += '<span class="cursor-blink">█</span>';
+    }
+  }, 40);
 }
 
 // Initialize on DOM ready
