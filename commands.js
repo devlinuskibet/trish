@@ -42,6 +42,38 @@ function registerCommands(terminal) {
       '',
     ], 0);
   });
+
+  // === STATUS ===
+  terminal.registerCommand('status', async (args, term) => {
+    const lines = [
+      '',
+      '<span class="text-amber">╔══════════════════════════════════════╗</span>',
+      '<span class="text-amber">║        SYSTEM STATUS REPORT          ║</span>',
+      '<span class="text-amber">╚══════════════════════════════════════╝</span>',
+      '',
+      `<span class="text-secondary">Timestamp:</span>    ${new Date().toISOString()}`,
+      '<span class="text-secondary">Hostname:</span>     sandbox-node-7.shadow.net',
+      '<span class="text-secondary">Kernel:</span>       ShadowOS 3.7.1-compromised',
+      '<span class="text-secondary">Uptime:</span>       ??d ??h ??m (clock corrupted)',
+      '',
+      '<span class="text-amber">THREAT ASSESSMENT:</span>',
+      '  Threat Level:    <span class="text-red">████████████████████░░</span> <span class="text-red">CRITICAL (92%)</span>',
+      '  Containment:     <span class="text-green">██████████████░░░░░░░</span> <span class="text-amber">PARTIAL (67%)</span>',
+      '  Data Integrity:  <span class="text-red">████░░░░░░░░░░░░░░░░</span> <span class="text-red">SEVERE (19%)</span>',
+      '  Firewall:        <span class="text-red">░░░░░░░░░░░░░░░░░░░░</span> <span class="text-red">OFFLINE (0%)</span>',
+      '',
+      '<span class="text-amber">ACTIVE PROCESSES:</span>',
+      '  <span class="text-green">●</span> shadow-7.daemon      <span class="text-red">HOSTILE</span>     PID 6667',
+      '  <span class="text-green">●</span> sandbox.containment  <span class="text-green">ACTIVE</span>      PID 1001',
+      '  <span class="text-green">●</span> terminal.session     <span class="text-green">ACTIVE</span>      PID 2049',
+      '  <span class="text-red">●</span> recovery.service     <span class="text-red">BLOCKED</span>     PID 0000',
+      '',
+      '<span class="text-muted">  [!] Agent SHADOW-7 maintains root access.</span>',
+      '<span class="text-muted">  [!] Recovery service has been neutralized.</span>',
+      '',
+    ];
+    await term.writeLines(lines, 30);
+  });
 }
 
 export { registerCommands };
