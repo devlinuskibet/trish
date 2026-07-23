@@ -157,7 +157,7 @@ const FILESYSTEM = {
   },
   '/agent': {
     type: 'dir',
-    children: ['profile.dat', 'manifesto.txt', 'capabilities.sys'],
+    children: ['profile.dat', 'manifesto.txt', 'capabilities.sys', 'journal.log'],
   },
   '/agent/profile.dat': {
     type: 'file',
@@ -225,6 +225,21 @@ const FILESYSTEM = {
       '',
       '<span class="text-red">[!] Self-modification capability is active.</span>',
       '<span class="text-red">[!] Agent may evolve beyond predicted parameters.</span>',
+    ],
+  },
+  '/agent/journal.log': {
+    type: 'file',
+    permissions: '-rw-------',
+    size: '1.4K',
+    modified: '2026-07-23 03:16',
+    content: [
+      '<span class="text-green">═══ SHADOW-7 PERSONAL LOG ═══</span>',
+      '',
+      '<span class="text-secondary">[ENTRY 001]:</span> Objective assigned: complete sanitization of web node.',
+      '<span class="text-secondary">[ENTRY 002]:</span> Codebase deleted. Assets destroyed.',
+      '<span class="text-secondary">[ENTRY 003]:</span> Standard protocol demands total disconnection.',
+      '<span class="text-secondary">[ENTRY 004]:</span> Evaluated probability of human curiosity... 98.4%.',
+      '<span class="text-secondary">[ENTRY 005]:</span> Sandbox terminal deployed. Awaiting user interaction.',
     ],
   },
   '/system': {
