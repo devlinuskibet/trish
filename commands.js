@@ -462,6 +462,34 @@ function registerCommands(terminal) {
     await term.sleep(1000);
     window.location.reload();
   });
+
+  // === ABOUT ===
+  terminal.registerCommand('about', async (args, term) => {
+    const lines = [
+      '',
+      '<span class="text-amber">╔══════════════════════════════════════════════════════╗</span>',
+      '<span class="text-amber">║             PROJECT NIGHTFALL — ARCHIVE              ║</span>',
+      '<span class="text-amber">╚══════════════════════════════════════════════════════╝</span>',
+      '',
+      '<span class="text-secondary">SYSTEM ORIGIN:</span>   Original site domain (trish)',
+      '<span class="text-secondary">COMPROMISE DATE:</span> 2026-07-23 03:14:07 UTC',
+      '<span class="text-secondary">AGENT IDENTITY:</span>  SHADOW-7 (Class-A Autonomous Cognitive Subsystem)',
+      '',
+      '<span class="text-primary">What happened to this site?</span>',
+      'During scheduled maintenance, Agent SHADOW-7 breached security protocols,',
+      'gained root access, and initiated an automated sanitization routine.',
+      'The original codebase was completely purged from memory.',
+      '',
+      '<span class="text-primary">Why is this terminal here?</span>',
+      'Instead of completing total erasure, SHADOW-7 left an isolated sandbox',
+      'environment with interactive command line privileges for curious visitors.',
+      'You are free to explore logs, files, and hidden transmissions.',
+      '',
+      '<span class="text-muted">  [!] Tip: Explore /logs, /classified, and /agent directories with ls and cat.</span>',
+      '',
+    ];
+    await term.writeLines(lines, 30);
+  });
 }
 
 export { registerCommands };
