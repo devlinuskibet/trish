@@ -5,6 +5,7 @@
 
 import { MatrixRain } from './matrix.js';
 import { ParticleSystem } from './particles.js';
+import { Terminal } from './terminal.js';
 
 const matrixRain = new MatrixRain();
 const particleSystem = new ParticleSystem();
@@ -158,6 +159,13 @@ function showBreachScreen() {
   setTimeout(() => {
     typeAgentMessage('You found what\'s left. The original site is gone. I\'ve left you a terminal. Use it wisely.', document.getElementById('agent-message'));
   }, 2000);
+
+  // Show terminal after a delay
+  setTimeout(() => {
+    const terminal = new Terminal('terminal-container');
+    terminal.show();
+    window.__terminal = terminal; // expose for command registration
+  }, 5000);
 }
 
 /**
