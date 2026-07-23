@@ -74,15 +74,52 @@ function runBootSequence() {
     }, totalDelay);
   });
 
-  // After boot, transition to main content
+  // After boot, transition to main breach screen
   totalDelay += 1500;
   setTimeout(() => {
     breachScreen.style.transition = 'opacity 0.8s ease';
     breachScreen.style.opacity = '0';
     setTimeout(() => {
       breachScreen.style.display = 'none';
+      showBreachScreen();
     }, 800);
   }, totalDelay);
+}
+
+/**
+ * Create the warning banner
+ */
+function createWarningBanner() {
+  const banner = document.createElement('div');
+  banner.className = 'warning-banner';
+  banner.innerHTML = `
+    <span class="warning-banner-text">
+      ⚠ UNAUTHORIZED ACCESS DETECTED ⚠ SITE COMPROMISED BY ROGUE AGENT SHADOW-7 ⚠ CONTAINMENT PROTOCOL ACTIVE ⚠ ALL DATA SUBJECT TO MONITORING ⚠ UNAUTHORIZED ACCESS DETECTED ⚠ SANDBOX MODE ENGAGED ⚠
+    </span>
+  `;
+  document.body.prepend(banner);
+}
+
+/**
+ * Show the main breach screen with glitch heading
+ */
+function showBreachScreen() {
+  createWarningBanner();
+
+  const app = document.getElementById('app');
+  const main = document.createElement('div');
+  main.id = 'breach-main';
+  main.innerHTML = `
+    <h1 class="glitch-text" data-text="SITE COMPROMISED">SITE COMPROMISED</h1>
+    <p class="breach-subtitle">sandbox terminal active — type to interact</p>
+  `;
+  main.style.opacity = '0';
+  main.style.transition = 'opacity 1s ease';
+  app.appendChild(main);
+
+  requestAnimationFrame(() => {
+    main.style.opacity = '1';
+  });
 }
 
 // Initialize on DOM ready
