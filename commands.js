@@ -197,6 +197,52 @@ function registerCommands(terminal) {
     node.content = node.decrypted;
     node.encrypted = false;
   });
+
+  // === SCAN ===
+  terminal.registerCommand('scan', async (args, term) => {
+    term.writeLine('');
+    term.writeLine('<span class="text-amber">Initiating network scan...</span>');
+    await term.sleep(400);
+
+    const nodes = [
+      { ip: '10.0.0.1', name: 'gateway.shadow.net', status: 'ACTIVE', color: 'green' },
+      { ip: '10.0.0.7', name: 'shadow-7.core', status: 'HOSTILE', color: 'red' },
+      { ip: '10.0.0.12', name: 'agent-12.relay', status: 'MONITORING', color: 'amber' },
+      { ip: '10.0.0.50', name: 'sandbox.terminal', status: 'ACTIVE', color: 'green' },
+      { ip: '10.0.0.99', name: 'recovery.node', status: 'OFFLINE', color: 'red' },
+      { ip: '10.0.?.?', name: 'unknown.entity', status: '???', color: 'muted' },
+    ];
+
+    // Scanning animation
+    for (let i = 0; i <= 10; i++) {
+      const bar = '█'.repeat(i * 2) + '░'.repeat(20 - i * 2);
+      const existing = term.outputEl.lastElementChild;
+      if (existing && existing.classList.contains('scan-progress')) {
+        existing.innerHTML = `  Scanning: <span class="text-green">[${bar}]</span> ${i * 10}%`;
+      } else {
+        const line = document.createElement('div');
+        line.className = 'terminal-line scan-progress';
+        line.innerHTML = `  Scanning: <span class="text-green">[${bar}]</span> ${i * 10}%`;
+        term.outputEl.appendChild(line);
+      }
+      term.scrollToBottom();
+      await term.sleep(200);
+    }
+
+    term.writeLine('');
+    term.writeLine('<span class="text-green">Scan complete.</span> Discovered nodes:');
+    term.writeLine('');
+    term.writeLine('  <span class="text-secondary">IP ADDRESS      HOSTNAME                 STATUS</span>');
+    term.writeLine('  <span class="text-secondary">──────────────  ───────────────────────  ──────────</span>');
+
+    for (const node of nodes) {
+      await term.sleep(150);
+      term.writeLine(`  ${node.ip.padEnd(16)}<span class="text-secondary">${node.name.padEnd(25)}</span><span class="text-${node.color}">${node.status}</span>`);
+    }
+    term.writeLine('');
+    term.writeLine('<span class="text-muted">  [!] Unknown entity detected on network. Exercise caution.</span>');
+    term.writeLine('');
+  });
 }
 
 export { registerCommands };
