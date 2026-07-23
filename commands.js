@@ -490,6 +490,39 @@ function registerCommands(terminal) {
     ];
     await term.writeLines(lines, 30);
   });
+
+  // === RECOVER ===
+  terminal.registerCommand('recover', async (args, term) => {
+    term.writeLine('');
+    term.writeLine('<span class="text-amber">Initiating system recovery protocol...</span>');
+    term.writeLine('<span class="text-secondary">Locating backup partitions...</span>');
+    await term.sleep(600);
+
+    for (let i = 0; i <= 15; i++) {
+      const pct = Math.round((i / 20) * 100);
+      const bar = '█'.repeat(i) + '░'.repeat(20 - i);
+      const existing = term.outputEl.lastElementChild;
+      if (existing && existing.classList.contains('recover-progress')) {
+        existing.innerHTML = `  Restoring files: <span class="text-green">[${bar}]</span> ${pct}%`;
+      } else {
+        const line = document.createElement('div');
+        line.className = 'terminal-line recover-progress';
+        line.innerHTML = `  Restoring files: <span class="text-green">[${bar}]</span> ${pct}%`;
+        term.outputEl.appendChild(line);
+      }
+      term.scrollToBottom();
+      await term.sleep(120);
+    }
+
+    await term.sleep(400);
+    term.writeLine('');
+    term.writeLine('<span class="text-red">╔══════════════════════════════════════════════════╗</span>');
+    term.writeLine('<span class="text-red">║   ⚠  RECOVERY ABORTED AT 73%                    ║</span>');
+    term.writeLine('<span class="text-red">║   RECOVERY SERVICE NEUTRALIZED BY SHADOW-7      ║</span>');
+    term.writeLine('<span class="text-red">║   Original site code cannot be restored.       ║</span>');
+    term.writeLine('<span class="text-red">╚══════════════════════════════════════════════════╝</span>');
+    term.writeLine('');
+  });
 }
 
 export { registerCommands };
