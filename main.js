@@ -4,8 +4,10 @@
 // ========================================
 
 import { MatrixRain } from './matrix.js';
+import { ParticleSystem } from './particles.js';
 
 const matrixRain = new MatrixRain();
+const particleSystem = new ParticleSystem();
 
 // Boot sequence messages
 const BOOT_SEQUENCE = [
@@ -110,6 +112,7 @@ function createWarningBanner() {
 function showBreachScreen() {
   createWarningBanner();
   matrixRain.init();
+  particleSystem.init();
 
   const app = document.getElementById('app');
   const main = document.createElement('div');
