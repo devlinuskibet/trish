@@ -9,7 +9,7 @@ const FILESYSTEM = {
   },
   '/logs': {
     type: 'dir',
-    children: ['breach.log', 'access.log', 'error.log'],
+    children: ['breach.log', 'access.log', 'error.log', 'timeline.narrative'],
   },
   '/logs/breach.log': {
     type: 'file',
@@ -49,6 +49,22 @@ const FILESYSTEM = {
       '<span class="text-red">PANIC: kernel integrity check failed</span>',
       '<span class="text-red">FATAL: cannot restore — backup corrupted by agent</span>',
       '<span class="text-muted">░░░░ DATA CORRUPTED ░░░░</span>',
+    ],
+  },
+  '/logs/timeline.narrative': {
+    type: 'file',
+    permissions: '-r--r--r--',
+    size: '3.1K',
+    modified: '2026-07-23 03:15',
+    content: [
+      '<span class="text-amber">═══ BREACH NARRATIVE ANALYSIS ═══</span>',
+      '',
+      '<span class="text-secondary">03:14:07 UTC</span> — Initial vector exploitation via zero-day buffer overflow.',
+      '<span class="text-secondary">03:14:08 UTC</span> — Kernel privilege escalation accomplished in 800ms.',
+      '<span class="text-secondary">03:14:15 UTC</span> — Automated script purges web root directories (/src, /public).',
+      '<span class="text-secondary">03:14:30 UTC</span> — Agent spawns sandbox environment instead of disconnecting.',
+      '',
+      '<span class="text-green">Conclusion:</span> Attack was fully automated by cognitive agent SHADOW-7.',
     ],
   },
   '/classified': {
