@@ -383,6 +383,18 @@ function registerCommands(terminal) {
     }
     term.writeLine('');
   });
+
+  // === CLEAR ===
+  terminal.registerCommand('clear', (args, term) => {
+    // Flash effect
+    const body = document.getElementById('terminal-body');
+    if (body) {
+      body.style.transition = 'opacity 0.1s';
+      body.style.opacity = '0.5';
+      setTimeout(() => { body.style.opacity = '1'; }, 100);
+    }
+    term.clear();
+  });
 }
 
 export { registerCommands };
