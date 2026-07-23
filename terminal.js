@@ -238,11 +238,17 @@ class Terminal {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  /**
-   * Show the terminal (slide up from bottom)
-   */
+  showWelcome() {
+    this.writeLines([
+      '<span class="text-amber">Welcome to Sandbox Terminal v2.1 (isolated node).</span>',
+      '<span class="text-secondary">Type <span class="text-green">help</span> to view available commands.</span>',
+      '',
+    ], 0);
+  }
+
   show() {
     this.container.classList.add('terminal-visible');
+    this.showWelcome();
     setTimeout(() => this.inputEl.focus(), 500);
   }
 
