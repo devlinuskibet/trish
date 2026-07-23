@@ -1,21 +1,135 @@
-/* === SHADOW-7 SANDBOX === */
-/* Base Reset */
+/* ================================================
+   SHADOW-7 SANDBOX – Design System
+   Site compromised. Containment active.
+   ================================================ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Fira+Code:wght@300;400;500;700&family=Share+Tech+Mono&display=swap');
+
+/* === CSS Custom Properties === */
+:root {
+  /* Core palette */
+  --neon-green: #00ff41;
+  --neon-green-dim: #00cc33;
+  --neon-green-glow: rgba(0, 255, 65, 0.3);
+  --blood-red: #ff0040;
+  --blood-red-dim: #cc0033;
+  --blood-red-glow: rgba(255, 0, 64, 0.3);
+  --terminal-amber: #ffb000;
+  --terminal-amber-dim: #cc8d00;
+  --terminal-amber-glow: rgba(255, 176, 0, 0.3);
+  --cyber-blue: #00d4ff;
+  --cyber-blue-dim: #00a8cc;
+  --cyber-blue-glow: rgba(0, 212, 255, 0.3);
+  --deep-purple: #a855f7;
+  --deep-purple-glow: rgba(168, 85, 247, 0.3);
+
+  /* Backgrounds */
+  --bg-void: #000000;
+  --bg-deep: #0a0a0a;
+  --bg-surface: #111111;
+  --bg-elevated: #1a1a1a;
+  --bg-terminal: #0c0c0c;
+
+  /* Text */
+  --text-primary: #e0e0e0;
+  --text-secondary: #888888;
+  --text-muted: #444444;
+  --text-terminal: #00ff41;
+
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+  --font-display: 'Share Tech Mono', 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Borders */
+  --border-subtle: 1px solid rgba(0, 255, 65, 0.1);
+  --border-accent: 1px solid rgba(0, 255, 65, 0.3);
+  --border-danger: 1px solid rgba(255, 0, 64, 0.3);
+}
+
+/* === Base Reset === */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #0a0a0a;
-  color: #00ff41;
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-void);
+  color: var(--text-terminal);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  cursor: default;
+}
+
+::selection {
+  background: var(--neon-green);
+  color: var(--bg-void);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-green-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-green);
+}
+
+/* === App Container === */
 #app {
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
+}
+
+/* === Typography Utilities === */
+.text-green { color: var(--neon-green); }
+.text-red { color: var(--blood-red); }
+.text-amber { color: var(--terminal-amber); }
+.text-blue { color: var(--cyber-blue); }
+.text-purple { color: var(--deep-purple); }
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+
+.text-glow-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green-glow), 0 0 20px var(--neon-green-glow);
+}
+
+.text-glow-red {
+  color: var(--blood-red);
+  text-shadow: 0 0 10px var(--blood-red-glow), 0 0 20px var(--blood-red-glow);
+}
+
+.text-glow-amber {
+  color: var(--terminal-amber);
+  text-shadow: 0 0 10px var(--terminal-amber-glow), 0 0 20px var(--terminal-amber-glow);
 }
