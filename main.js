@@ -6,6 +6,7 @@
 import { MatrixRain } from './matrix.js';
 import { ParticleSystem } from './particles.js';
 import { Terminal } from './terminal.js';
+import { registerCommands } from './commands.js';
 
 const matrixRain = new MatrixRain();
 const particleSystem = new ParticleSystem();
@@ -163,8 +164,9 @@ function showBreachScreen() {
   // Show terminal after a delay
   setTimeout(() => {
     const terminal = new Terminal('terminal-container');
+    registerCommands(terminal);
     terminal.show();
-    window.__terminal = terminal; // expose for command registration
+    window.__terminal = terminal;
   }, 5000);
 }
 
