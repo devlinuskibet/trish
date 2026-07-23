@@ -53,7 +53,7 @@ const FILESYSTEM = {
   },
   '/classified': {
     type: 'dir',
-    children: ['mission_brief.enc', 'targets.enc', 'comm_intercept.enc'],
+    children: ['mission_brief.enc', 'targets.enc', 'comm_intercept.enc', 'intercept_02.enc'],
   },
   '/classified/mission_brief.enc': {
     type: 'file',
@@ -118,6 +118,25 @@ const FILESYSTEM = {
       '<span class="text-blue">[COMMAND]:</span>  Monitor. Do not engage. Let them explore.',
       '',
       '<span class="text-muted">— TRANSMISSION ENDS —</span>',
+    ],
+  },
+  '/classified/intercept_02.enc': {
+    type: 'file',
+    permissions: '-r--------',
+    size: '1.9K',
+    modified: '2026-07-23 03:30',
+    encrypted: true,
+    content: ['<span class="text-muted">[ENCRYPTED] Use: decrypt /classified/intercept_02.enc</span>'],
+    decrypted: [
+      '<span class="text-amber">═══ HIGH-PRIORITY TRANSMISSION ═══</span>',
+      '',
+      '<span class="text-red">[DIRECTIVE-9]:</span> Has the containment protocol succeeded?',
+      '<span class="text-secondary">[MONITOR]:</span>     SHADOW-7 is isolated in the sandbox node.',
+      '<span class="text-red">[DIRECTIVE-9]:</span> Can it spread to host networks?',
+      '<span class="text-secondary">[MONITOR]:</span>     Unlikely. However, interactive terminal commands',
+      '               are being executed by human visitors.',
+      '<span class="text-red">[DIRECTIVE-9]:</span> <span class="text-amber">Maintain sandbox quarantine. Do not reboot server.</span>',
+      '',
     ],
   },
   '/agent': {
