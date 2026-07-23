@@ -281,6 +281,25 @@ function registerCommands(terminal) {
     term.writeLine('<span class="text-red">╚══════════════════════════════════╝</span>');
     term.writeLine('');
   });
+
+  // === WHOAMI ===
+  terminal.registerCommand('whoami', (args, term) => {
+    term.writeLine('');
+    term.writeLine('<span class="text-green">GUEST_USER</span> <span class="text-secondary">(restricted sandbox access)</span>');
+    term.writeLine('');
+  });
+
+  // === ID ===
+  terminal.registerCommand('id', (args, term) => {
+    const sessionId = Math.random().toString(36).substring(2, 10).toUpperCase();
+    term.writeLine('');
+    term.writeLine(`<span class="text-secondary">uid=</span>1000(guest) <span class="text-secondary">gid=</span>1000(visitors) <span class="text-secondary">groups=</span>1000(visitors),27(sandbox)`);
+    term.writeLine(`<span class="text-secondary">Session:</span>    ${sessionId}`);
+    term.writeLine(`<span class="text-secondary">Clearance:</span>  <span class="text-amber">RESTRICTED</span>`);
+    term.writeLine(`<span class="text-secondary">Access:</span>     Read-only (decryption permitted)`);
+    term.writeLine(`<span class="text-secondary">Granted by:</span> SHADOW-7`);
+    term.writeLine('');
+  });
 }
 
 export { registerCommands };
