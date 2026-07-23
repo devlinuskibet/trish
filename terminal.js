@@ -155,6 +155,12 @@ class Terminal {
     line.className = `terminal-line ${className}`;
     line.innerHTML = html;
     this.outputEl.appendChild(line);
+    
+    // Output buffering: limit total lines to 500
+    if (this.outputEl.children.length > 500) {
+      this.outputEl.removeChild(this.outputEl.firstElementChild);
+    }
+    
     this.scrollToBottom();
   }
 
