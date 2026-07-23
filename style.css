@@ -564,3 +564,37 @@ body {
   100% { opacity: 0; }
 }
 
+/* === Responsive Mobile Adjustments === */
+@media (max-width: 768px) {
+  #breach-main {
+    padding: var(--space-md);
+  }
+
+  .agent-card {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    margin-top: var(--space-xl);
+    width: 90%;
+  }
+
+  .agent-info {
+    align-items: center;
+  }
+
+  #terminal-container {
+    height: 60vh;
+  }
+
+  .terminal-body {
+    font-size: 11px;
+    padding: 10px;
+  }
+
+  .ascii-art {
+    font-size: 9px;
+  }
+}
+
+
