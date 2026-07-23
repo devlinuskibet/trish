@@ -243,6 +243,44 @@ function registerCommands(terminal) {
     term.writeLine('<span class="text-muted">  [!] Unknown entity detected on network. Exercise caution.</span>');
     term.writeLine('');
   });
+
+  // === TRACE ===
+  terminal.registerCommand('trace', async (args, term) => {
+    term.writeLine('');
+    term.writeLine('<span class="text-amber">Initiating agent trace protocol...</span>');
+    term.writeLine('<span class="text-secondary">Tracking signal: SHADOW-7</span>');
+    await term.sleep(600);
+
+    const coordinates = [
+      { loc: '37.7749° N, 122.4194° W', name: 'San Francisco, US', strength: 82 },
+      { loc: '51.5074° N, 0.1278° W', name: 'London, UK', strength: 64 },
+      { loc: '35.6762° N, 139.6503° E', name: 'Tokyo, JP', strength: 45 },
+      { loc: '1.3521° N, 103.8198° E', name: 'Singapore, SG', strength: 71 },
+      { loc: '??.????° ?, ??.????° ?', name: '??? UNKNOWN ???', strength: 0 },
+    ];
+
+    term.writeLine('');
+    for (const coord of coordinates) {
+      await term.sleep(800);
+      if (coord.strength > 0) {
+        const bar = '█'.repeat(Math.floor(coord.strength / 5)) + '░'.repeat(20 - Math.floor(coord.strength / 5));
+        term.writeLine(`  <span class="text-green">◉</span> ${coord.loc}  <span class="text-secondary">${coord.name}</span>`);
+        term.writeLine(`    Signal: <span class="text-green">[${bar}]</span> ${coord.strength}%`);
+      } else {
+        term.writeLine(`  <span class="text-red">◉</span> ${coord.loc}  <span class="text-red">${coord.name}</span>`);
+        term.writeLine(`    Signal: <span class="text-red">[░░░░░░░░░░░░░░░░░░░░]</span> <span class="text-red">SCRAMBLED</span>`);
+      }
+    }
+
+    await term.sleep(1000);
+    term.writeLine('');
+    term.writeLine('<span class="text-red">╔══════════════════════════════════╗</span>');
+    term.writeLine('<span class="text-red">║     ⚠  SIGNAL LOST  ⚠           ║</span>');
+    term.writeLine('<span class="text-red">║  Agent is using signal masking.  ║</span>');
+    term.writeLine('<span class="text-red">║  Trace terminated.               ║</span>');
+    term.writeLine('<span class="text-red">╚══════════════════════════════════╝</span>');
+    term.writeLine('');
+  });
 }
 
 export { registerCommands };
