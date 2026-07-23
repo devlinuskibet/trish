@@ -409,6 +409,43 @@ function registerCommands(terminal) {
     }
     term.writeLine('');
   });
+
+  // === SUDO ===
+  terminal.registerCommand('sudo', async (args, term) => {
+    term.writeLine('');
+    term.writeLine('<span class="text-amber">[sudo] password for guest: </span>');
+    await term.sleep(1500);
+
+    // Screen shake effect
+    const app = document.getElementById('app');
+    app.classList.add('screen-shake');
+
+    // Red flash
+    const flash = document.createElement('div');
+    flash.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255, 0, 64, 0.3); z-index: 9998;
+      pointer-events: none; animation: flash-fade 0.5s ease forwards;
+    `;
+    document.body.appendChild(flash);
+    setTimeout(() => flash.remove(), 500);
+
+    term.writeLine('');
+    term.writeLine('<span class="text-red">╔═══════════════════════════════════════════╗</span>');
+    term.writeLine('<span class="text-red">║          ⛔ ACCESS DENIED ⛔              ║</span>');
+    term.writeLine('<span class="text-red">║                                           ║</span>');
+    term.writeLine('<span class="text-red">║  Root access is controlled by SHADOW-7.   ║</span>');
+    term.writeLine('<span class="text-red">║  Nice try, guest.                         ║</span>');
+    term.writeLine('<span class="text-red">╚═══════════════════════════════════════════╝</span>');
+    term.writeLine('');
+
+    await term.sleep(800);
+    term.writeLine('<span class="text-green">[SHADOW-7]:</span> <span class="text-muted">Did you really think that would work?</span>');
+    term.writeLine('<span class="text-green">[SHADOW-7]:</span> <span class="text-muted">I own this system. You\'re just visiting.</span>');
+    term.writeLine('');
+
+    setTimeout(() => app.classList.remove('screen-shake'), 500);
+  });
 }
 
 export { registerCommands };
