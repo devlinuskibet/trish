@@ -135,6 +135,68 @@ function registerCommands(terminal) {
     node.content.forEach(line => term.writeLine(line));
     term.writeLine('');
   });
+
+  // === DECRYPT ===
+  terminal.registerCommand('decrypt', async (args, term) => {
+    if (!args[0]) {
+      term.writeLine('<span class="text-red">Usage: decrypt &lt;filename&gt;</span>');
+      return;
+    }
+
+    const path = args[0].startsWith('/') ? args[0] : '/' + args[0];
+    const node = getNode(path);
+
+    if (!node) {
+      term.writeLine(`<span class="text-red">decrypt: ${term.escapeHtml(path)}: No such file</span>`);
+      return;
+    }
+
+    if (!node.encrypted || !node.decrypted) {
+      term.writeLine(`<span class="text-amber">decrypt: ${term.escapeHtml(path)}: File is not encrypted</span>`);
+      return;
+    }
+
+    // Decryption animation
+    term.writeLine('');
+    term.writeLine('<span class="text-amber">Initiating decryption sequence...</span>');
+    await term.sleep(500);
+
+    const scrambleChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`ABCDEFabcdef0123456789';
+    const progressSteps = 20;
+
+    for (let i = 0; i <= progressSteps; i++) {
+      const pct = Math.round((i / progressSteps) * 100);
+      const filled = '█'.repeat(i);
+      const empty = '░'.repeat(progressSteps - i);
+      const scramble = Array.from({ length: 8 }, () =>
+        scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
+      ).join('');
+
+      // Update last line (poor man's carriage return)
+      const existing = term.outputEl.lastElementChild;
+      if (existing && existing.classList.contains('decrypt-progress')) {
+        existing.innerHTML = `  <span class="text-green">[${filled}${empty}]</span> ${pct}% <span class="text-muted">${scramble}</span>`;
+      } else {
+        const line = document.createElement('div');
+        line.className = 'terminal-line decrypt-progress';
+        line.innerHTML = `  <span class="text-green">[${filled}${empty}]</span> ${pct}% <span class="text-muted">${scramble}</span>`;
+        term.outputEl.appendChild(line);
+      }
+      term.scrollToBottom();
+      await term.sleep(80);
+    }
+
+    term.writeLine('<span class="text-green">✓ Decryption complete.</span>');
+    term.writeLine('');
+
+    // Show decrypted content
+    node.decrypted.forEach(line => term.writeLine(line));
+    term.writeLine('');
+
+    // Mark as decrypted
+    node.content = node.decrypted;
+    node.encrypted = false;
+  });
 }
 
 export { registerCommands };
