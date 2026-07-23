@@ -191,7 +191,14 @@ function typeAgentMessage(text, element) {
 
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-  runBootSequence();
+  const splash = document.getElementById('splash-screen');
+  setTimeout(() => {
+    if (splash) {
+      splash.style.opacity = '0';
+      setTimeout(() => splash.remove(), 600);
+    }
+    runBootSequence();
+  }, 1200);
 });
 
 console.log('%c[SHADOW-7] Sandbox initialized.', 'color: #00ff41; font-family: monospace;');
