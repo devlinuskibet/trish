@@ -73,7 +73,10 @@ class Terminal {
   bindEvents() {
     this.inputEl.addEventListener('keydown', (e) => {
       this.playKeyClick();
-      if (e.key === 'Enter') {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        this.handleTabCompletion();
+      } else if (e.key === 'Enter') {
         const cmd = this.inputEl.value.trim();
         if (cmd) {
           this.executeCommand(cmd);
@@ -95,6 +98,21 @@ class Terminal {
 
     // Focus on load
     setTimeout(() => this.inputEl.focus(), 100);
+  }
+
+  handleTabCompletion() {
+    const val = this.inputEl.value;
+    if (!val) return;
+
+    const registeredCmds = Object.keys(this.commandHandlers);
+    const matches = registeredCmds.filter(cmd => cmd.startsWith(val.toLowerCase()));
+
+    if (matches.length === 1) {
+      this.inputEl.value = matches[0] + ' ';
+    } else if (matches.length > 1) {
+      this.writeLine(`<span class="text-green">${this.prompt}</span>${this.escapeHtml(val)}`, 'command-echo');
+      this.writeLine(`<span class="text-secondary">Possible matches: ${matches.join('  ')}</span>`);
+    }
   }
 
   navigateHistory(direction) {
