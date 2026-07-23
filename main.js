@@ -7,6 +7,7 @@ import { MatrixRain } from './matrix.js';
 import { ParticleSystem } from './particles.js';
 import { Terminal } from './terminal.js';
 import { registerCommands } from './commands.js';
+import { GlitchEngine } from './glitch.js';
 
 const matrixRain = new MatrixRain();
 const particleSystem = new ParticleSystem();
@@ -115,6 +116,7 @@ function showBreachScreen() {
   createWarningBanner();
   matrixRain.init();
   particleSystem.init();
+  new GlitchEngine().init();
 
   const app = document.getElementById('app');
   const main = document.createElement('div');

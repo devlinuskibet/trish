@@ -597,4 +597,12 @@ body {
   }
 }
 
+/* === Random Burst Glitch Effect === */
+.active-glitch-burst {
+  filter: invert(0.15) hue-rotate(90deg) contrast(1.4);
+  transform: scale(1.002) skewX(1deg);
+  transition: filter 0.05s ease, transform 0.05s ease;
+}
+
+
 
