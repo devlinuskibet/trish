@@ -5,8 +5,12 @@
 class Terminal {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
-    this.history = [];
-    this.historyIndex = -1;
+    try {
+      this.history = JSON.parse(localStorage.getItem('terminal_history') || '[]');
+    } catch (_) {
+      this.history = [];
+    }
+    this.historyIndex = this.history.length;
     this.commandHandlers = {};
     this.outputBuffer = [];
     this.isProcessing = false;
@@ -145,6 +149,9 @@ class Terminal {
     // Add to history
     this.history.push(rawInput);
     this.historyIndex = this.history.length;
+    try {
+      localStorage.setItem('terminal_history', JSON.stringify(this.history.slice(-50)));
+    } catch (_) {}
 
     // Echo the command
     this.writeLine(`<span class="text-green">${this.prompt}</span>${this.escapeHtml(rawInput)}`, 'command-echo');
