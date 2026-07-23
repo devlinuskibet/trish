@@ -11,16 +11,16 @@
   /* Core palette */
   --neon-green: #00ff41;
   --neon-green-dim: #00cc33;
-  --neon-green-glow: rgba(0, 255, 65, 0.3);
+  --neon-green-glow: rgba(0, 255, 65, 0.4);
   --blood-red: #ff0040;
   --blood-red-dim: #cc0033;
-  --blood-red-glow: rgba(255, 0, 64, 0.3);
+  --blood-red-glow: rgba(255, 0, 64, 0.4);
   --terminal-amber: #ffb000;
   --terminal-amber-dim: #cc8d00;
-  --terminal-amber-glow: rgba(255, 176, 0, 0.3);
+  --terminal-amber-glow: rgba(255, 176, 0, 0.4);
   --cyber-blue: #00d4ff;
   --cyber-blue-dim: #00a8cc;
-  --cyber-blue-glow: rgba(0, 212, 255, 0.3);
+  --cyber-blue-glow: rgba(0, 212, 255, 0.4);
   --deep-purple: #a855f7;
   --deep-purple-glow: rgba(168, 85, 247, 0.3);
 
