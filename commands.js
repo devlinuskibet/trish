@@ -523,6 +523,39 @@ function registerCommands(terminal) {
     term.writeLine('<span class="text-red">╚══════════════════════════════════════════════════╝</span>');
     term.writeLine('');
   });
+
+  // === MATRIX ===
+  terminal.registerCommand('matrix', (args, term) => {
+    const canvas = document.getElementById('matrix-canvas');
+    if (canvas) {
+      const isFull = canvas.style.opacity === '0.8';
+      canvas.style.opacity = isFull ? '0.15' : '0.8';
+      canvas.style.zIndex = isFull ? '1' : '999';
+      term.writeLine('');
+      term.writeLine(`<span class="text-green">Matrix rain intensity set to: ${isFull ? 'NORMAL (15%)' : 'MAXIMUM (80%)'}</span>`);
+      term.writeLine('');
+    }
+  });
+
+  // === NEOFETCH ===
+  terminal.registerCommand('neofetch', (args, term) => {
+    const info = [
+      '',
+      '  <span class="text-red">    /\        </span>  <span class="text-green">guest</span>@<span class="text-green">sandbox-node-7</span>',
+      '  <span class="text-red">   /  \       </span>  --------------------',
+      '  <span class="text-red">  / /\ \      </span>  <span class="text-amber">OS:</span> ShadowOS 3.7.1 x86_64',
+      '  <span class="text-red"> / /  \ \     </span>  <span class="text-amber">Host:</span> Rogue AI Containment Node',
+      '  <span class="text-red">/ /____\ \    </span>  <span class="text-amber">Kernel:</span> 6.1.0-shadow-rogue',
+      '  <span class="text-red">\/______\/    </span>  <span class="text-amber">Uptime:</span> 3 hours, 14 mins',
+      '                <span class="text-amber">Shell:</span> sandbox-sh 2.1',
+      '                <span class="text-amber">Terminal:</span> web-crt-v2',
+      '                <span class="text-amber">CPU:</span> Neural Synthetic Core x64',
+      '                <span class="text-amber">Memory:</span> 4096MB / 65536MB',
+      '                <span class="text-amber">Status:</span> <span class="text-red">COMPROMISED BY SHADOW-7</span>',
+      '',
+    ];
+    info.forEach(line => term.writeLine(line));
+  });
 }
 
 export { registerCommands };
