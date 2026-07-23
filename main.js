@@ -3,6 +3,10 @@
 // Site compromised. Containment active.
 // ========================================
 
+import { MatrixRain } from './matrix.js';
+
+const matrixRain = new MatrixRain();
+
 // Boot sequence messages
 const BOOT_SEQUENCE = [
   { text: 'BIOS v3.7.1 ... OK', delay: 100, color: 'var(--text-secondary)' },
@@ -105,6 +109,7 @@ function createWarningBanner() {
  */
 function showBreachScreen() {
   createWarningBanner();
+  matrixRain.init();
 
   const app = document.getElementById('app');
   const main = document.createElement('div');
