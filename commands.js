@@ -395,6 +395,20 @@ function registerCommands(terminal) {
     }
     term.clear();
   });
+
+  // === HISTORY ===
+  terminal.registerCommand('history', (args, term) => {
+    const hist = term.getHistory();
+    term.writeLine('');
+    if (hist.length === 0) {
+      term.writeLine('<span class="text-muted">No commands in history.</span>');
+    } else {
+      hist.forEach((cmd, i) => {
+        term.writeLine(`  <span class="text-muted">${String(i + 1).padStart(4)}</span>  ${term.escapeHtml(cmd)}`);
+      });
+    }
+    term.writeLine('');
+  });
 }
 
 export { registerCommands };
