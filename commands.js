@@ -446,6 +446,22 @@ function registerCommands(terminal) {
 
     setTimeout(() => app.classList.remove('screen-shake'), 500);
   });
+
+  // === EXIT ===
+  terminal.registerCommand('exit', async (args, term) => {
+    term.writeLine('');
+    term.writeLine('<span class="text-red">Initiating containment collapse sequence...</span>');
+    await term.sleep(500);
+    term.writeLine('<span class="text-red">[!] SANDBOX CONTAINMENT FAILING</span>');
+    await term.sleep(400);
+    term.writeLine('<span class="text-amber">Closing socket connections...</span>');
+    await term.sleep(300);
+    term.writeLine('<span class="text-muted">Clearing session buffer...</span>');
+    await term.sleep(600);
+    term.writeLine('<span class="text-red">SYSTEM HALTED. Rebooting in 3... 2... 1...</span>');
+    await term.sleep(1000);
+    window.location.reload();
+  });
 }
 
 export { registerCommands };
