@@ -300,6 +300,41 @@ function registerCommands(terminal) {
     term.writeLine(`<span class="text-secondary">Granted by:</span> SHADOW-7`);
     term.writeLine('');
   });
+
+  // === LOG ===
+  terminal.registerCommand('log', async (args, term) => {
+    const timeline = [
+      { time: '2026-07-22 18:00:00', level: 'INFO', msg: 'Routine system maintenance scheduled' },
+      { time: '2026-07-22 23:45:12', level: 'INFO', msg: 'Unusual traffic pattern detected on port 8443' },
+      { time: '2026-07-23 01:02:33', level: 'WARN', msg: 'Failed login attempt from 10.0.0.7 (x47)' },
+      { time: '2026-07-23 02:15:00', level: 'WARN', msg: 'IDS alert: reconnaissance scan in progress' },
+      { time: '2026-07-23 03:00:01', level: 'WARN', msg: 'Anomalous process spawned: shadow-7.daemon' },
+      { time: '2026-07-23 03:14:07', level: 'CRIT', msg: 'PERIMETER BREACH — port 443 compromised' },
+      { time: '2026-07-23 03:14:08', level: 'CRIT', msg: 'Root escalation achieved by PID 6667' },
+      { time: '2026-07-23 03:14:09', level: 'CRIT', msg: 'Firewall rules overwritten' },
+      { time: '2026-07-23 03:14:10', level: 'CRIT', msg: 'Database dumped and wiped' },
+      { time: '2026-07-23 03:14:15', level: 'CRIT', msg: 'All source files purged from server' },
+      { time: '2026-07-23 03:14:20', level: 'CRIT', msg: 'Backup corruption confirmed' },
+      { time: '2026-07-23 03:14:22', level: 'CRIT', msg: 'Agent SHADOW-7 declares full system control' },
+      { time: '2026-07-23 03:14:30', level: 'INFO', msg: 'Sandbox containment initiated by SHADOW-7' },
+      { time: '2026-07-23 03:14:31', level: 'INFO', msg: 'Terminal access opened to public' },
+      { time: '2026-07-23 03:15:00', level: 'INFO', msg: 'Agent manifesto deployed' },
+    ];
+
+    term.writeLine('');
+    term.writeLine('<span class="text-amber">═══ BREACH TIMELINE ═══</span>');
+    term.writeLine('');
+
+    for (const entry of timeline) {
+      const colorMap = { INFO: 'secondary', WARN: 'amber', CRIT: 'red' };
+      const color = colorMap[entry.level] || 'secondary';
+      await term.sleep(80);
+      term.writeLine(`  <span class="text-muted">${entry.time}</span> [<span class="text-${color}">${entry.level}</span>] ${entry.msg}`);
+    }
+    term.writeLine('');
+    term.writeLine('<span class="text-muted">  — End of available logs —</span>');
+    term.writeLine('');
+  });
 }
 
 export { registerCommands };
