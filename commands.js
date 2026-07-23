@@ -335,6 +335,54 @@ function registerCommands(terminal) {
     term.writeLine('<span class="text-muted">  — End of available logs —</span>');
     term.writeLine('');
   });
+
+  // === PING ===
+  terminal.registerCommand('ping', async (args, term) => {
+    const target = args[0];
+    if (!target) {
+      term.writeLine('<span class="text-red">Usage: ping &lt;host&gt;</span>');
+      return;
+    }
+
+    const responses = {
+      'shadow-7': { reachable: false, msg: 'Agent is masking its location.' },
+      'google.com': { reachable: false, msg: 'External network access blocked by sandbox.' },
+      'localhost': { reachable: true, ttl: '0.1ms' },
+      'sandbox.terminal': { reachable: true, ttl: '0.3ms' },
+      'recovery.node': { reachable: false, msg: 'Host is offline. Destroyed by SHADOW-7.' },
+      'agent-12.relay': { reachable: true, ttl: '142ms' },
+    };
+
+    const resp = responses[target];
+
+    term.writeLine(`<span class="text-secondary">PING ${target}...</span>`);
+
+    for (let i = 0; i < 3; i++) {
+      await term.sleep(500);
+      if (resp && resp.reachable) {
+        term.writeLine(`  <span class="text-green">64 bytes from ${target}: icmp_seq=${i + 1} ttl=64 time=${resp.ttl}</span>`);
+      } else if (resp) {
+        term.writeLine(`  <span class="text-red">Request timeout for icmp_seq ${i + 1}</span>`);
+      } else {
+        term.writeLine(`  <span class="text-red">Request timeout for icmp_seq ${i + 1}</span>`);
+      }
+    }
+
+    term.writeLine('');
+    if (resp && !resp.reachable) {
+      term.writeLine(`<span class="text-red">--- ${target} ping statistics ---</span>`);
+      term.writeLine(`<span class="text-red">3 packets transmitted, 0 received, 100% packet loss</span>`);
+      term.writeLine(`<span class="text-muted">${resp.msg}</span>`);
+    } else if (resp && resp.reachable) {
+      term.writeLine(`<span class="text-green">--- ${target} ping statistics ---</span>`);
+      term.writeLine(`<span class="text-green">3 packets transmitted, 3 received, 0% packet loss</span>`);
+    } else {
+      term.writeLine(`<span class="text-red">--- ${target} ping statistics ---</span>`);
+      term.writeLine(`<span class="text-red">3 packets transmitted, 0 received, 100% packet loss</span>`);
+      term.writeLine(`<span class="text-muted">Unknown host. Network is isolated.</span>`);
+    }
+    term.writeLine('');
+  });
 }
 
 export { registerCommands };
