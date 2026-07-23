@@ -2,6 +2,8 @@
 // Terminal Commands Registry
 // ========================================
 
+import { getNode } from './filesystem.js';
+
 /**
  * Register all commands on the terminal instance
  */
@@ -73,6 +75,65 @@ function registerCommands(terminal) {
       '',
     ];
     await term.writeLines(lines, 30);
+  });
+
+  // === LS ===
+  terminal.registerCommand('ls', (args, term) => {
+    const path = args[0] || '/';
+    const node = getNode(path);
+
+    if (!node) {
+      term.writeLine(`<span class="text-red">ls: cannot access '${term.escapeHtml(path)}': No such file or directory</span>`);
+      return;
+    }
+
+    if (node.type !== 'dir') {
+      term.writeLine(`<span class="text-secondary">${path}</span>`);
+      return;
+    }
+
+    term.writeLine('');
+    term.writeLine(`<span class="text-amber">Contents of ${path}:</span>`);
+    term.writeLine('');
+
+    node.children.forEach(child => {
+      const childPath = path === '/' ? `/${child}` : `${path}/${child}`;
+      const childNode = getNode(childPath);
+      if (childNode) {
+        if (childNode.type === 'dir') {
+          term.writeLine(`  <span class="text-blue">drwxr-xr-x</span>  <span class="text-blue">${child}/</span>`);
+        } else {
+          const icon = childNode.encrypted ? '🔒' : '  ';
+          term.writeLine(`  <span class="text-secondary">${childNode.permissions}</span>  ${childNode.size.padStart(6)}  <span class="text-secondary">${childNode.modified}</span>  ${icon} ${child}`);
+        }
+      }
+    });
+    term.writeLine('');
+  });
+
+  // === CAT ===
+  terminal.registerCommand('cat', (args, term) => {
+    if (!args[0]) {
+      term.writeLine('<span class="text-red">Usage: cat &lt;filename&gt;</span>');
+      return;
+    }
+
+    const path = args[0].startsWith('/') ? args[0] : '/' + args[0];
+    const node = getNode(path);
+
+    if (!node) {
+      term.writeLine(`<span class="text-red">cat: ${term.escapeHtml(path)}: No such file or directory</span>`);
+      return;
+    }
+
+    if (node.type === 'dir') {
+      term.writeLine(`<span class="text-red">cat: ${term.escapeHtml(path)}: Is a directory</span>`);
+      return;
+    }
+
+    term.writeLine('');
+    node.content.forEach(line => term.writeLine(line));
+    term.writeLine('');
   });
 }
 
